@@ -3,6 +3,16 @@
     padding: 0
 }
 
+hr {
+    height: 0;
+    border: none;
+    border-top: 1px solid #dedede;
+}
+
+body {
+    background-color: #efefef;
+}
+
 a {
     color: inherit;
     text-decoration: none;
@@ -17,6 +27,10 @@ a {
 header {
     margin-top: 32px;
     padding: 0 16px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: calc(100% - 32px);
 }
 
 header>nav>ul {
@@ -52,3 +66,108 @@ header .rs {
 header .card {
     color: #b7b7b7;
 }
+
+.banner {
+    height: 515px;
+    background-image: url('../img/rs-cover.jpg');
+    background-position: center center;
+    background-size: cover;
+}
+.banner>.mask {
+    height: 515px;
+    background-color: rgb(0,0,0,0.8);
+}
+
+.user-card {
+    max-width: 960px;
+    margin: 0 auto;
+    border: 1px solid red;
+    background-color: #fff;
+}
+
+.user-card .welcome {
+    background-color: #e8676b;
+    color: white;
+    padding: 4px 10px;
+    line-height: 22px;
+    display: inline-block;
+    position: relative;
+    margin-bottom: 30px; 
+}
+
+.user-card .welcome .triangle {
+    display: block;
+    border: 10px solid transparent;
+    width: 0px;
+    border-top-width: 0px;
+    border-left-color:   #e8676b;
+    position: absolute;
+    top: 100%;
+    left: 4px;
+}
+
+.user-card .picture, .user-card .text {
+    float: left;
+}
+
+.picture-and-text {
+    padding: 50px;
+}
+
+.user-card .text {
+    margin-left: 65px;
+    width: 470px;
+}
+.user-card .text hr{
+    margin: 20px 0;
+}
+
+.user-card .text h1{
+    margin-bottom: 12px;
+}
+
+.user-card dl dd {
+    float: left;
+    width: 70%;
+    padding: 5px 0;
+    color: #9da0a7;
+}
+
+.user-card dl dt {
+    float: left;
+    width: 30%;
+    padding: 5px 0;
+    font-weight: bold;   
+}
+
+.user-card footer {
+    background-color: #e8676b;
+    text-align: center;
+}
+.user-card footer svg{
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+    fill: white;
+    padding: 2.5px 0;
+}
+
+.user-card footer a {
+    /* border: 1px solid black; */
+    display: inline-block;
+    line-height: 23px;
+    width: 35px;
+    border-radius: 50%;
+    margin: 16px
+}
+
+.user-card footer a:hover {
+    background-color: #cf5d5f;
+}
+
+.icon {
+    width: 1em; height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+ }
