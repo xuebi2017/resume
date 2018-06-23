@@ -3,6 +3,10 @@
     padding: 0
 }
 
+ul,ol {
+    list-style: none;
+}
+
 hr {
     height: 0;
     border: none;
@@ -83,6 +87,7 @@ header .card {
     margin: 0 auto;
     border: 1px solid red;
     background-color: #fff;
+    box-shadow: 0px 1px 4px 0px rgba(82,76,82,0.63);
 }
 
 .user-card .welcome {
@@ -171,3 +176,187 @@ header .card {
     fill: currentColor;
     overflow: hidden;
  }
+
+ main {
+     margin-top:-355px;
+ }
+
+ .download-resume {
+     font-size: 14px;
+ }
+
+ .download-resume-wrapper {
+     text-align: center;
+ }
+ .download-resume {
+     line-height: 16px;
+     padding: 21px 55px;
+     border: 1px solid #cdcfd1;
+     display: inline-block;
+     font-weight: bold;
+     color:#3d4451;
+     border-radius: 2px;
+     margin-top: 32px; 
+     transition: box-shadow 0.5s;    
+ }
+
+ .download-resume:hover {
+    box-shadow: 0px 4px 13px 0px rgba(82,76,82,0.2);
+    transition: box-shadow 0.5s;
+ }
+
+ .self-introduction {
+    max-width: 960px;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 40px;
+    font-family: 'STKaiti';
+    font-size: 18px;
+ }
+
+.skills {
+    max-width: 960px;
+    margin: 0 auto;
+    margin-top: 60px;  
+}
+
+.portfolio {
+    max-width: 920px;
+    margin: 0 auto;
+    margin-top: 60px;    
+}
+
+.skills > h2,
+.portfolio > h2 {
+    color: #3d4451;
+    font-size: 34px;
+    line-height: 1.2;
+    font-weight: 600;
+    text-align: center;
+}
+
+.skills ul {
+    background-color: #fff;
+    box-shadow: 0px 1px 4px 0px rgba(82,76,82,0.63);
+    padding: 42px 50px 10px;
+    margin-top: 30px; 
+}
+
+.skills ul li {
+    width: 48%;
+    float: left;
+}
+
+.skills ul li:nth-of-type(2n) {
+    float: right;
+}
+
+.skills  h3 {
+    font-size: 14px;
+    line-height: 1.1;
+    padding-right: 40px;
+    font-weight: normal;
+}
+
+.skills .progress-bar {
+    height: 5px;
+    background-color: #fae1e1;
+    border-radius: 2px;
+    margin: 4px 0 40px;    
+}
+
+.skills .progress-bar> .progress {
+    height: 100%;
+    background-color: #e8676b;
+    width: 70%;
+    border-radius: 2px;
+}
+
+.portfolio {
+    text-align: center;
+}
+
+.portfolio nav {
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 30px;
+}
+
+.portfolio nav ul {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.portfolio nav ul li {
+    float: left;
+    margin-left: 20px;
+}
+
+.portfolio nav ul li:nth-of-type(1) {
+    margin-left: 0;
+}
+
+.portfolio nav .bar {
+    background-color: white;
+    height: 5px;
+    margin-top: 10px;
+    margin-bottom: 28px;
+    border-radius: 2px;
+}
+
+.portfolio nav .bar .bar-inner {
+    background-color: #e8676b;
+    height: 100%;
+    transition: all 0.3s;
+}
+
+.portfolio nav .bar.state-1 .bar-inner {
+    width: 44px;
+    border-radius: 2px;    
+}
+
+.portfolio nav .bar.state-2 .bar-inner {
+    width: 44px;
+    border-radius: 2px;    
+    margin-left: 49px; 
+}
+
+.portfolio nav .bar.state-3 .bar-inner {
+    width: 87px;
+    border-radius: 2px;    
+    margin-left: 107px; 
+}
+
+.portfolio .works {
+    position: relative;
+    height: 600px;
+    margin-bottom: 100px;
+    box-shadow: 0px 1px 4px 0px rgba(82,76,82,0.63);
+}
+
+.portfolio .works .big,
+.portfolio .works .small1,
+.portfolio .works .small2{
+    position: absolute;
+}
+
+
+
+.portfolio .works .big {
+
+}
+
+.portfolio .works .small1 {
+    top: 0px;
+    left: 640px;
+}
+
+.portfolio .works .small2 {
+    left: 640px;
+    top: 320px;
+}
+
+
+
+
