@@ -8,9 +8,13 @@
     <title>我的网页</title>
     <script src="//at.alicdn.com/t/font_712003_5g0we9cxa0g.js"></script>
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/loading.css">
 </head>
 
 <body>
+    <div class="wrapper acive">
+        <div class="loading"></div>
+    </div>
     <header class="clearfix">
         <a href="" style="float: left;">
             <span class="rs">RS</span>
@@ -174,6 +178,10 @@
   }
   portfolioNative.onclick = function() {
     portfolioBar.className = 'bar state-3';
+  }
+
+  window.onload  = function() {
+      document.getElementsByClassName('wrapper')[0].classList.remove('active');
   }
 
 </script>

@@ -3,6 +3,19 @@
     padding: 0
 }
 
+.wrapper .active{
+    background-color: #ddd; 
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: block;
+}
+
+.wrapper {
+    display: none;
+}
+
 ul,ol {
     list-style: none;
 }

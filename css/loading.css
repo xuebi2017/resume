@@ -1,0 +1,29 @@
+.loading::before, .loading::after {
+    content: '';
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    border-radius: 50%;
+    background-color: #777;
+    animation:  loading 1.5s  linear infinite;
+}
+.loading::after {
+    animation-delay: 0.75s
+}
+@keyframes loading {
+    0% {
+        width: 0;
+        height: 0;
+        opacity: 1;
+    }
+    100% {
+        width: 100px;
+        height: 100px;
+        opacity: 0;
+    }
+}
