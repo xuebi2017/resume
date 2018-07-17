@@ -12,36 +12,46 @@
 </head>
 
 <body>
-    <div class="wrapper acive">
+    <div class="wrapper active">
         <div class="loading"></div>
     </div>
-    <header class="clearfix">
+    <header class="header clearfix" id="header">
         <a href="" style="float: left;">
             <span class="rs">RS</span>
             <span class="card">card</span>
         </a>
-        <nav style="float: right">
+        <nav class="menu" style="float: right">
             <ul class="clearfix">
                 <li>
-                    <a href="#">关于</a>
+                    <a href="#about">关于</a>
                 </li>
                 <li>
-                    <a href="#">技能</a>
+                    <a href="#skills">技能</a>
                 </li>
                 <li>
-                    <a href="#">作品</a>
+                    <a href="#works"><span>作品</span></a>
+                    <ul class="submenu">
+                        <li>作品1</li>
+                        <li>作品2</li>
+                        <li>作品3</li>
+                    </ul>
                 </li>
                 <li>
-                    <a href="#">博客</a>
+                    <a  href="#blogs">博客</a>
+                    <ul class="submenu"> 
+                            <li>博客1</li>
+                            <li>博客2</li>
+                            <li>博客3</li>
+                    </ul>
                 </li>
                 <li>
-                    <a href="#">日历</a>
+                    <a href="#calendar">日历</a>
                 </li>
                 <li>
-                    <a href="#">联系方式</a>
+                    <a href="#mobile">联系方式</a>
                 </li>
                 <li>
-                    <a href="#">其他</a>
+                    <a href="#others">其他</a>
                 </li>
             </ul>
         </nav>
@@ -49,7 +59,7 @@
     <div class="banner">
         <div class="mask"></div>
     </div>
-    <main>
+    <main id="about">
         <div class="user-card">
             <div class="picture-and-text clearfix">
                 <div class="picture">
@@ -95,7 +105,7 @@
             张玉萍，前端开发工程师。
         </p>
     </main>
-    <section class="skills">
+    <section class="skills" id="skills">
         <h2>技能</h2>
         <ul class="clearfix">
             <li>
@@ -150,7 +160,7 @@
             </li>
         </ul>
     </section>
-    <section class="portfolio">
+    <section class="portfolio" id="works">
         <h2>作品集</h2>
         <nav>
             <ul class="clearfix">
@@ -168,22 +178,89 @@
             <div class="small2"><img src="./img/3.png" alt="作品3" style="width: 280px;height: 280px;"></div>
         </div>
     </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/17.2.0/Tween.min.js"></script>
+    <script>
+        loading();
+    
+        portfolioAll.onclick = function() {
+            portfolioBar.className = 'bar state-1';
+        }
+        portfolioFrameWork.onclick = function() {
+            portfolioBar.className = 'bar state-2';
+        }
+        portfolioNative.onclick = function() {
+            portfolioBar.className = 'bar state-3';
+        }
+    
+        function loading() {
+            setTimeout(function() {
+                document.getElementsByClassName('wrapper')[0].classList.remove('active');
+            }, 1000)
+        }
+    
+        document.onscroll = function(event) {
+            if(window.scrollY) {
+                header.classList.add('sticky')
+            }else {
+                header.classList.remove('sticky')
+            }
+        }
+    
+        var liTags = document.querySelectorAll('nav.menu > ul > li');
+        for(var i = 0; i < liTags.length; i++) {
+            liTags[i].onmouseenter = function(event) {
+                event.currentTarget.classList.add('active')
+            }
+    
+            liTags[i].onmouseleave = function(event) {
+                event.currentTarget.classList.remove('active')
+            }
+        }
+
+        // Setup the animation loop.
+        function animate(time) {
+            requestAnimationFrame(animate);
+            TWEEN.update(time);
+        }
+        requestAnimationFrame(animate);
+    
+        let aTags = document.querySelectorAll('nav.menu > ul > li > a')
+        for(let i = 0; i < aTags.length; i++) {
+            aTags[i].onclick = function(event) {
+                event.preventDefault()
+                let a = event.currentTarget
+                let href = a.getAttribute('href')
+                let element = document.querySelector(href)
+                let top = element.offsetTop
+    
+                // let n = 25
+                // let duration = 500/n
+                // let currentTop = window.scrollY
+                // let targetTop = top - 80
+                // let distance = (targetTop - currentTop)/n
+                // let k = 0
+                // let intervalId = setInterval(() => {
+                //     if(k === 25) {
+                //         clearInterval(intervalId)
+                //         return
+                //     }
+                //     k++;
+                //     scrollTo(0, currentTop + distance*k)                
+                // }, duration)
+
+                let currentTop = window.scrollY
+                let targetTop = top - 80
+                var coords = { y: currentTop }; 
+                // let t = 
+                var tween = new TWEEN.Tween(coords) 
+                        .to({ y: targetTop }, Math.min(Math.abs((targetTop - currentTop)/100*200), 500))
+                        .easing(TWEEN.Easing.Quadratic.Out) 
+                        .onUpdate(function() { 
+                            scrollTo(0, coords.y)
+                        })
+                        .start();
+                            }
+        }
+    </script>
 </body>
-<script>
-  portfolioAll.onclick = function() {
-    portfolioBar.className = 'bar state-1';
-  }
-  portfolioFrameWork.onclick = function() {
-    portfolioBar.className = 'bar state-2';
-  }
-  portfolioNative.onclick = function() {
-    portfolioBar.className = 'bar state-3';
-  }
-
-  window.onload  = function() {
-      document.getElementsByClassName('wrapper')[0].classList.remove('active');
-  }
-
-</script>
-
 </html>

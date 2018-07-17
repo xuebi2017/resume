@@ -3,17 +3,17 @@
     padding: 0
 }
 
-.wrapper .active{
+.wrapper {
     background-color: #ddd; 
     position: fixed;
     width: 100%;
     height: 100%;
     z-index: 1;
-    display: block;
+    display: none;
 }
 
-.wrapper {
-    display: none;
+.wrapper.active{
+    display: block;
 }
 
 ul,ol {
@@ -42,12 +42,25 @@ a {
 }
 
 header {
-    margin-top: 32px;
-    padding: 0 16px;
+    padding: 16px 16px;
     position: fixed;
     top: 0;
     left: 0;
     width: calc(100% - 32px);
+    font-size: 24px;
+    font-family: "Arial Black";
+    transition: all 0.8s;
+    color: #b7b7b7;    
+}
+
+header.sticky {
+    background-color: #fff;
+    z-index: 1;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.19), 0 6px 10px rgba(0, 0, 0, 0.23);
+    padding: 10px 16px;
+    color: #3d4451;
+    height: 33px;
+    line-height: 27px;
 }
 
 header>nav>ul {
@@ -57,23 +70,65 @@ header>nav>ul {
 header>nav>ul>li {
     float: left;
     margin: 0 17px;
+    position: relative;
 }
 
 header>nav>ul>li>a {
     font-size: 12px;
-    color: #b7b7b7;
     font-weight: bold;
     border-bottom: 3px solid transparent;
     padding-bottom: 2px;
+    position: relative;
 }
 
-header>nav>ul>li>a:hover {
-    border-bottom: 3px solid #e06567;
+header>nav>ul>li.active>a::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #e06567;
+    height: 3px;
+    animation: menuSlide 0.3s;
 }
 
-header {
-    font-size: 24px;
-    font-family: "Arial Black"
+@keyframes menuSlide {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+header>nav>ul>li>ul.submenu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    white-space: nowrap;
+    font-size: 12px;
+    background-color: white;
+    color: #3d4451;
+    animation: submenuSlide 0.3s; 
+    box-shadow: 0 0 5px rgba(0,0,0,0.5)       
+}
+
+@keyframes submenuSlide {
+    0% {
+        right: 100%;
+    }
+    100% {
+        right: 0%;
+    }
+}
+header>nav>ul>li.active>ul.submenu {
+    display: block;
+}
+
+header>nav>ul>li>ul.submenu>li {
+    padding: 5px 10px;
 }
 
 header .rs {
@@ -210,12 +265,11 @@ header .card {
      color:#3d4451;
      border-radius: 2px;
      margin-top: 32px; 
-     transition: box-shadow 0.5s;    
+     transition: all 0.5s;    
  }
 
  .download-resume:hover {
     box-shadow: 0px 4px 13px 0px rgba(82,76,82,0.2);
-    transition: box-shadow 0.5s;
  }
 
  .self-introduction {
