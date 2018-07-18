@@ -59,7 +59,7 @@
     <div class="banner">
         <div class="mask"></div>
     </div>
-    <main id="about">
+    <section data-section id="about" class="about">
         <div class="user-card">
             <div class="picture-and-text clearfix">
                 <div class="picture">
@@ -102,10 +102,11 @@
             <a class="download-resume" href="./新建 Microsoft Excel 工作表.pdf" target="_blank" download>下载PDF简历</a>
         </p>
         <p class="self-introduction">
-            张玉萍，前端开发工程师。
+            张玉萍，前端开发工程师。<br>
+            技能：前端开发。
         </p>
-    </main>
-    <section class="skills" id="skills">
+    </section>
+    <section data-section class="skills" id="skills">
         <h2>技能</h2>
         <ul class="clearfix">
             <li>
@@ -160,7 +161,7 @@
             </li>
         </ul>
     </section>
-    <section class="portfolio" id="works">
+    <section data-section class="portfolio" id="works">
         <h2>作品集</h2>
         <nav>
             <ul class="clearfix">
@@ -180,8 +181,18 @@
     </section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/17.2.0/Tween.min.js"></script>
     <script>
-        loading();
-    
+        // loading()
+
+        document.getElementsByClassName('wrapper')[0].classList.remove('active');
+        
+        initPosition()
+
+        setTimeout(function() {
+            scrollHighlight()
+            scrollMove()
+        }, 200)
+       
+
         portfolioAll.onclick = function() {
             portfolioBar.className = 'bar state-1';
         }
@@ -199,6 +210,10 @@
         }
     
         document.onscroll = function(event) {
+            scrollHighlight()
+
+            scrollMove()
+
             if(window.scrollY) {
                 header.classList.add('sticky')
             }else {
@@ -259,7 +274,44 @@
                             scrollTo(0, coords.y)
                         })
                         .start();
-                            }
+            }
+        }
+
+        function nearWindow() {
+            let special = document.querySelectorAll('[data-section]')
+            let minIndex = 0
+            for(let i = 0; i < special.length; i ++) {
+                if(Math.abs(special[i].offsetTop-window.scrollY) < Math.abs(special[minIndex].offsetTop-window.scrollY)) {
+                    minIndex = i
+                }
+            }
+            return {
+                minIndex: minIndex,
+                special: special
+            }
+        }
+
+        function initPosition() {
+            let obj = nearWindow()
+            for(let i = 0; i < obj.special.length; i++) {
+                obj.special[i].classList.add('offset')            
+            }
+        }
+
+        function scrollMove() {
+            let obj = nearWindow()
+            obj.special[obj.minIndex].classList.remove('offset')            
+        }
+
+        function scrollHighlight() {
+            let obj = nearWindow()
+            let specialId = obj.special[obj.minIndex].id
+            let targetSection = document.querySelector('[href="#' + specialId + '"]')
+            let specialSections = targetSection.parentNode.parentNode.children
+            for(let i = 0; i < specialSections.length; i ++) {
+                specialSections[i].classList.remove('highlight')
+            }
+            targetSection.parentNode.classList.add('highlight')
         }
     </script>
 </body>

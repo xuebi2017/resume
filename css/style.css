@@ -81,7 +81,26 @@ header>nav>ul>li>a {
     position: relative;
 }
 
-header>nav>ul>li.active>a::after {
+[data-section].offset {
+    transform: translateY(100px);
+}
+
+[data-section] {
+    transform: translateY(0);
+    transition: all 0.5s;
+}
+
+@keyframes slideUp {
+    0% {
+        transform: translateY(100px)
+    }
+    100% {
+        transform: translate(0)
+    }
+}
+
+header>nav>ul>li.active>a::after,
+header>nav>ul>li.highlight>a::after {
     content: '';
     display: block;
     position: absolute;
@@ -245,7 +264,7 @@ header .card {
     overflow: hidden;
  }
 
- main {
+ section.about {
      margin-top:-355px;
  }
 
@@ -264,7 +283,7 @@ header .card {
      font-weight: bold;
      color:#3d4451;
      border-radius: 2px;
-     margin-top: 32px; 
+     margin-top: 85px; 
      transition: all 0.5s;    
  }
 
@@ -329,7 +348,8 @@ header .card {
     height: 5px;
     background-color: #fae1e1;
     border-radius: 2px;
-    margin: 4px 0 40px;    
+    margin: 4px 0 40px;  
+    overflow: hidden;
 }
 
 .skills .progress-bar> .progress {
@@ -337,6 +357,14 @@ header .card {
     background-color: #e8676b;
     width: 70%;
     border-radius: 2px;
+    transform: translateX(0);
+    /* display: none; */
+    transition: all 1s;
+}
+
+.skills.offset .progress-bar > .progress {
+    transform: translateX(-100%);
+    /* display: block */
 }
 
 .portfolio {
@@ -406,12 +434,6 @@ header .card {
 .portfolio .works .small1,
 .portfolio .works .small2{
     position: absolute;
-}
-
-
-
-.portfolio .works .big {
-
 }
 
 .portfolio .works .small1 {
