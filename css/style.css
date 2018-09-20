@@ -300,20 +300,14 @@ header .card {
     font-size: 18px;
  }
 
-.skills {
+.skills, .portfolio, .message{
     max-width: 960px;
     margin: 0 auto;
     margin-top: 60px;  
 }
 
-.portfolio {
-    max-width: 920px;
-    margin: 0 auto;
-    margin-top: 60px;    
-}
-
 .skills > h2,
-.portfolio > h2 {
+.portfolio > h2, .message > h2 {
     color: #3d4451;
     font-size: 34px;
     line-height: 1.2;
@@ -446,6 +440,36 @@ header .card {
     top: 320px;
 }
 
+.swiper-container {
+    width: 668px;
+    height: 501px;
+}
 
+.portfolio .swiper-button-prev, .portfolio .swiper-button-next {
+    background-color: #fff;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    margin-top: 0;
+    top: 57%;
+    outline: none;
+}
+
+.message > ul {
+    max-width: 700px;
+    margin: 30px auto;
+    border-top: 1px solid #ddd;
+}
+
+.message > ul > li {
+    border-bottom: 1px solid #ddd;
+    padding: 16px;
+}
+
+.postMessageForm {
+    max-width: 500px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+}
 
 

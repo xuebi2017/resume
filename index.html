@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>我的网页</title>
     <script src="//at.alicdn.com/t/font_712003_5g0we9cxa0g.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.10.0/dist/av-min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.1.0/css/swiper.min.css">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/loading.css">
 </head>
@@ -173,13 +175,50 @@
                 <div class="bar-inner"></div>
             </div>
         </nav>
-        <div class="works">
+        <!-- Slider main container -->
+        <div class="swiper-container">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+                <!-- Slides -->
+                <a class="swiper-slide" href="https://xuebi2017.github.io/kbd/index.html"  target="_blank">
+                    <img class="swiper-slide" src="./img/nav-page.jpg">
+                </a>
+                <!-- style="width: 100%;display: inline-block" -->
+                <a class="swiper-slide" href="https://xuebi2017.github.io/draw-board/index.html"  target="_blank">
+                    <img class="swiper-slide" src="./img/canvas.jpg">
+                </a>
+                <a class="swiper-slide" href="https://xuebi2017.github.io/normal-seamless/index.html"  target="_blank">
+                    <img class="swiper-slide" src="./img/slider.jpg">
+                </a>
+            </div>
+            <!-- If we need pagination -->
+            <div class="swiper-pagination"></div>
+            <!-- If we need scrollbar -->
+            <!-- <div class="swiper-scrollbar"></div> -->
+        </div>
+        <!-- If we need navigation buttons -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+        <!-- <div class="works">
             <div class="big"><img src="./img/1.png" alt="作品1" style="width: 600px;height: 600px;"></div>
             <div class="small1"><img src="./img/2.png" alt="作品2" style="width: 280px;height: 280px;"></div>
             <div class="small2"><img src="./img/3.png" alt="作品3" style="width: 280px;height: 280px;"></div>
-        </div>
+        </div> -->
+    </section>
+    <section class="message">
+        <h2>留言</h2> 
+        <ul id="messageList"></ul>                           
+        <form action="" id="postMessageForm" class="postMessageForm">
+            <label for="name">姓名：</label>
+            <input type="text" name="name" id="name">
+            <label for="content">内容：</label>
+            <input type="text" name="content" id="content">
+            <input type="submit" value="提交">
+        </form>
     </section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/17.2.0/Tween.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.5/js/swiper.min.js"></script>
+    <script src="./js/message.js"></script>
     <script>
         // loading()
 
@@ -190,7 +229,7 @@
         setTimeout(function() {
             scrollHighlight()
             scrollMove()
-        }, 200)
+        }, 300)
        
 
         portfolioAll.onclick = function() {
@@ -313,6 +352,28 @@
             }
             targetSection.parentNode.classList.add('highlight')
         }
+
+        var mySwiper = new Swiper ('.swiper-container', {
+            // Optional parameters
+            direction: 'horizontal',
+            loop: true,
+
+            // If we need pagination
+            pagination: {
+            el: '.swiper-pagination',
+            },
+
+            // Navigation arrows
+            navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+            },
+
+            // And if we need scrollbar
+            // scrollbar: {
+            // el: '.swiper-scrollbar',
+            // },
+        })
     </script>
 </body>
 </html>
