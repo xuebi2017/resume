@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/components/prism-actionscript.min.js"></script>
+    <script src="./vendor/prism/js/prism.js"></script>
     <title>会动的简历</title>
     <link rel="stylesheet" href="./vendor/prism/css/prism.css">
     <style id="styleTag"></style>
@@ -31,12 +31,18 @@ body {
     padding: 16px;
 }
 `
+        // The code snippet you want to highlight, as a string
+        // var text = "var data = 1;";
+
+        // Returns a highlighted HTML string
+        // console.log('html',html)
         let n = 0
         let intervalId = setInterval(() => {
             n +=1
             console.log('一轮')
             code.innerText = result.slice(0,n)
-            styleTag.innerText = result.slice(0,n)
+            code.innerText = Prism.highlight(code.innerText, Prism.languages.css, 'css');            
+            styleTag.innerHTML = result.slice(0,n)
             if(n >= result.length) {
                 clearInterval(intervalId)
             }
