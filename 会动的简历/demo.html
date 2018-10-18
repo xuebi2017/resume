@@ -4,25 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/components/prism-actionscript.min.js"></script>
+    <title>会动的简历</title>
+    <link rel="stylesheet" href="./vendor/prism/css/prism.css">
+    <style id="styleTag"></style>
 </head>
 <body>
+    <pre id="code"></pre>
+    <script src="./vendor/prism/js/prism.js"></script>
     <script>
-        let result = `<div>
-    body {
-    background: yellow;
-    }
-    </div>
+        let result = `/* 
+ * 面试官你好，我是XXX
+ * 只用文字作做我介绍太单调了
+ * 我就用代码来介绍吧
+ * 首先准备一些样式
+ */
+* {
+    transition: all 1s;
+}
+body {
+    background: rgb(222, 222, 222);
+    font-size: 16px;
+}
+#code {
+    border: 1px solid #ddd;
+    padding: 16px;
+}
 `
         let n = 0
         let intervalId = setInterval(() => {
             n +=1
             console.log('一轮')
-            document.body.innerText = result.slice(0,n)
+            code.innerText = result.slice(0,n)
+            styleTag.innerText = result.slice(0,n)
             if(n >= result.length) {
                 clearInterval(intervalId)
             }
-        }, 500)
+        }, 100)
     </script>
 </body>
 </html>
