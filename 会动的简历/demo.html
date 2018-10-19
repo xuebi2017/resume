@@ -7,6 +7,7 @@
     <script src="./vendor/prism/js/prism.js"></script>
     <title>会动的简历</title>
     <link rel="stylesheet" href="./vendor/prism/css/prism.css">
+    <link rel="stylesheet" href="./css/default.css">
     <style id="styleTag"></style>
 </head>
 <body>
@@ -14,7 +15,7 @@
     <script src="./vendor/prism/js/prism.js"></script>
     <script>
         let result = `/* 
- * 面试官你好，我是XXX
+ * 你好，我是XXX
  * 只用文字作做我介绍太单调了
  * 我就用代码来介绍吧
  * 首先准备一些样式
@@ -27,26 +28,193 @@ body {
     font-size: 16px;
 }
 #code {
-    border: 1px solid #ddd;
+    border: 1px solid red;
     padding: 16px;
 }
+/*接下来我要将我的代码高亮*/
+.token.selector {
+    color: #690;
+}
+.token.property {
+    color: #905;
+}
+.token.function {
+    color: #DD4A68;
+}
+/*加点3D效果*/
+/*不玩了，我来介绍一下我自己吧
+*我需要一张白纸
+*/
+#code {
+    position: fixed;
+    left: 0;
+    width: 50%;
+}
+#paper {
+    position: fixed;
+    right: 0;
+    width: 50%;
+    height: 100vh;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+}
+#paper > .content {
+    background: white;
+    width: 100%;
+    height: 100%;
+    padding: 16px;
+}
+`
+        var result2 = `
+/*接下来把Markdown变成HTML - marked.js*/
+`
+var md = `
+# 自我介绍
+我叫 XXX
+1990 年 1 月出生
+XXX 学校毕业
+自学前端半年
+希望应聘前端开发岗位
+# 技能介绍
+熟悉 JavaScript CSS
+# 项目介绍
+1. XXX 轮播
+2. XXX 简历
+3. XXX 画板
+# 联系方式
+- QQ xxxxxxxx
+- Email xxxxxxxx
+- 手机 xxxxxxx
+# 联系方式
+- QQ xxxxxxxx
+- Email xxxxxxxx
+- 手机 xxxxxxx
+# 联系方式
+- QQ xxxxxxxx
+- Email xxxxxxxx
+- 手机 xxxxxxx
+# 联系方式
+- QQ xxxxxxxx
+- Email xxxxxxxx
+- 手机 xxxxxxx
+# 联系方式
+- QQ xxxxxxxx
+- Email xxxxxxxx
+- 手机 xxxxxxx
+# 联系方式
+- QQ xxxxxxxx
+- Email xxxxxxxx
+- 手机 xxxxxxx
+# 联系方式
+- QQ xxxxxxxx
+- Email xxxxxxxx
+- 手机 xxxxxxx
+# 联系方式
+- QQ xxxxxxxx
+- Email xxxxxxxx
+- 手机 xxxxxxx
 `
         // The code snippet you want to highlight, as a string
         // var text = "var data = 1;";
 
         // Returns a highlighted HTML string
         // console.log('html',html)
-        let n = 0
-        let intervalId = setInterval(() => {
-            n +=1
-            console.log('一轮')
-            code.innerText = result.slice(0,n)
-            code.innerText = Prism.highlight(code.innerText, Prism.languages.css, 'css');            
-            styleTag.innerHTML = result.slice(0,n)
-            if(n >= result.length) {
-                clearInterval(intervalId)
-            }
-        }, 100)
+        // let n = 0
+        // let intervalId = setInterval(() => {
+        //     n +=1
+        //     console.log('一轮')
+        //     code.innerHTML = result.slice(0,n)
+        //     // result = result.slice(0,n)
+        //     code.innerHTML = Prism.highlight(code.innerHTML, Prism.languages.css, 'css');            
+        //     styleTag.innerHTML = result.slice(0,n)
+        //     if(n >= result.length) {
+        //         clearInterval(intervalId)
+        //         fn2()
+        //         fn3()
+        //     }
+        // }, 10)
+
+        writeCode('', result, () => {
+            createPaper(() => {
+                writeCode(result, result2, () => {
+                    writeMarkdown(md, () => {
+                        markdownToHtml()
+                    })
+                })
+            })
+        })
+
+        function createPaper(fn) {
+            var paper = document.createElement('div')
+            paper.id = 'paper'
+            var content = document.createElement('pre')
+            content.className = 'content'
+            paper.appendChild(content)
+            document.body.appendChild(paper)
+            fn.call()
+        }
+        function fn3() {
+            var result2 = `
+#paper {
+    width: 100px;
+    height: 100px;
+    background: red;
+}
+`
+            var n = 0;
+            var id = setInterval(() => {
+                n +=1
+                console.log(result2.slice(0, n))
+                console.log('result21111',result)
+                // result += result + result2.slice(n-1, n)
+                code.innerHTML = result + result2.slice(0, n)
+                code.innerHTML = Prism.highlight(code.innerHTML, Prism.languages.css, 'css');     
+                styleTag.innerHTML = result + result2.slice(0,n)
+                if(n >= result2.length) {
+                    clearInterval(id)
+                }
+            }, 10)
+        }
+
+        function writeCode(prefix, code, fn) {
+            let domCode = document.querySelector('#code')
+            let n = 0;
+            // domCode.innerHTML = prefix || ''
+            let id = setInterval(() => {
+                n +=1
+                domCode.innerHTML = Prism.highlight(prefix + code.slice(0, n), Prism.languages.css, 'css');     
+                styleTag.innerHTML = prefix + code.slice(0,n)
+                domCode.scrollTop = domCode.scrollHeight
+                console.log('domCode.scrollHeight', domCode.scrollHeight)
+                if(n >= code.length) {
+                    clearInterval(id)
+                    // console.log('fn', fn)
+                    fn && fn.call()
+                    // createPaper.call()
+                }
+            }, 10)
+        }
+
+        function writeMarkdown(markdown, fn) {
+            let domPaper = document.querySelector('#paper > .content')
+            let n = 0;
+            let id = setInterval(() => {
+                n +=1
+                domPaper.innerHTML = markdown.slice(0, n)   
+                // styleTag.innerHTML = prefix + markdown.slice(0,n)
+                domPaper.scrollTop = domPaper.scrollHeight
+                console.log('domPaper.scrollHeight', domPaper.scrollHeight)
+                if(n >= markdown.length) {
+                    clearInterval(id)
+                    // console.log('fn', fn)
+                    fn && fn.call()
+                    // createPaper.call()
+                }
+            }, 10)
+        }
     </script>
 </body>
 </html>
