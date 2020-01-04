@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-hans">
 
 <head>
     <meta charset="UTF-8">
@@ -47,7 +47,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#calendar">日历</a>
+                    <a href="#message">留言</a>
                 </li>
                 <li>
                     <a href="#mobile">联系方式</a>
@@ -61,11 +61,11 @@
     <div class="banner">
         <div class="mask"></div>
     </div>
-    <section data-section id="about" class="about">
+    <section id="about" class="about">
         <div class="user-card">
             <div class="picture-and-text clearfix">
                 <div class="picture">
-                    <img src="./img/avatar.jpg" alt="头像">
+                    <img src="./img/avatar.png" alt="头像" style="width: 300px">
                 </div>
                 <div class="text">
                     <span class="welcome">
@@ -83,7 +83,7 @@
                         <dt>邮箱</dt>
                         <dd>xuebi2013@yeah.net</dd>
                         <dt>手机</dt>
-                        <dd>15256080672</dd>
+                        <dd>18119942920</dd>
                     </dl>
                 </div>
             </div>
@@ -199,13 +199,13 @@
         <!-- If we need navigation buttons -->
         <div class="swiper-button-prev"></div>
         <div class="swiper-button-next"></div>
-        <!-- <div class="works">
-            <div class="big"><img src="./img/1.png" alt="作品1" style="width: 600px;height: 600px;"></div>
-            <div class="small1"><img src="./img/2.png" alt="作品2" style="width: 280px;height: 280px;"></div>
-            <div class="small2"><img src="./img/3.png" alt="作品3" style="width: 280px;height: 280px;"></div>
-        </div> -->
     </section>
-    <section class="message">
+    <section data-section class="slide-in" id="blogs">
+        <div class="img-wrap img1"><img src="./img/1.png" alt="作品1"></div>
+        <div class="img-wrap img2"><img src="./img/2.png" alt="作品2"></div>
+        <div class="img-wrap img3"><img src="./img/3.png" alt="作品3"></div>
+    </section>
+    <section class="message" id="message">
         <h2>留言</h2> 
         <ul id="messageList"></ul>                           
         <form action="" id="postMessageForm" class="postMessageForm">
@@ -252,17 +252,34 @@
             }, 1000)
         }
     
-        document.onscroll = function(event) {
+        var preScrollY = 0, diff = 0;
+        window.addEventListener('scroll', throttle(function(event) {
             scrollHighlight()
-
             scrollMove()
+
+            diff = window.scrollY - preScrollY
+            preScrollY = window.scrollY
 
             if(window.scrollY) {
                 header.classList.add('sticky')
             }else {
                 header.classList.remove('sticky')
             }
-        }
+        }, 50))
+        
+        // window.onscroll = function(event) {
+        //     scrollHighlight()
+        //     scrollMove()
+
+        //     diff = window.scrollY - preScrollY
+        //     preScrollY = window.scrollY
+
+        //     if(window.scrollY) {
+        //         header.classList.add('sticky')
+        //     }else {
+        //         header.classList.remove('sticky')
+        //     }
+        // }
     
         var liTags = document.querySelectorAll('nav.menu > ul > li');
         for(var i = 0; i < liTags.length; i++) {
@@ -309,22 +326,30 @@
                 let currentTop = window.scrollY
                 let targetTop = top - 80
                 var coords = { y: currentTop }; 
-                // let t = 
-                var tween = new TWEEN.Tween(coords) 
-                        .to({ y: targetTop }, Math.min(Math.abs((targetTop - currentTop)/100*200), 500))
-                        .easing(TWEEN.Easing.Quadratic.Out) 
-                        .onUpdate(function() { 
-                            scrollTo(0, coords.y)
-                        })
-                        .start();
+                // var tween = new TWEEN.Tween(coords) 
+                //         .to({ y: targetTop }, Math.min(Math.abs((targetTop - currentTop)/100*200), 500))
+                //         .easing(TWEEN.Easing.Quadratic.Out) 
+                //         .onUpdate(function() { 
+                //             scrollTo(0, coords.y)
+                //         })
+                //         .start();
+                
+                //可以将以上的补间动画改成下面浏览器自带的动画
+                scrollTo({ 
+                    top: targetTop, 
+                    behavior: "smooth" 
+                });
             }
         }
 
+        //上边缘离可视窗口最近的data-section
         function nearWindow() {
             let special = document.querySelectorAll('[data-section]')
             let minIndex = 0
+            let clientHeight = document.documentElement.clientHeight || document.body.clientHeight;
+            //找到距离窗口的下边缘最近的data-section
             for(let i = 0; i < special.length; i ++) {
-                if(Math.abs(special[i].offsetTop-window.scrollY) < Math.abs(special[minIndex].offsetTop-window.scrollY)) {
+                if(Math.abs(special[i].offsetTop-window.scrollY-clientHeight) < Math.abs(special[minIndex].offsetTop-window.scrollY-clientHeight)) {
                     minIndex = i
                 }
             }
@@ -334,6 +359,15 @@
             }
         }
 
+        //是否是向下滚动
+        function ifScrollDown() {
+            if(diff > 0) {
+                return true
+            }else {
+                return false
+            }
+        }
+        
         function initPosition() {
             let obj = nearWindow()
             for(let i = 0; i < obj.special.length; i++) {
@@ -343,7 +377,21 @@
 
         function scrollMove() {
             let obj = nearWindow()
-            obj.special[obj.minIndex].classList.remove('offset')            
+            let clientHeight = document.documentElement.clientHeight || document.body.clientHeight;
+            if(ifScrollDown()) {
+                console.log('向下滚动')
+                console.log("TCL: scrollMove -> obj.minIndex", obj.minIndex)
+                if((obj.special[obj.minIndex].offsetTop - window.scrollY - clientHeight) < -100) {
+                   obj.special[obj.minIndex].classList.remove('offset')  
+                }
+            }else {
+                console.log('向上滚动')
+                console.log("TCL: scrollMove -> obj.minIndex", obj.minIndex)
+                console.log("TCL: scrollMove -> obj.special[obj.minIndex].offsetTop - window.scrollY - clientHeight", obj.special[obj.minIndex].offsetTop - window.scrollY - clientHeight)
+                if((obj.special[obj.minIndex].offsetTop - window.scrollY - clientHeight) > -100) {
+                   obj.special[obj.minIndex].classList.add('offset')  
+                }
+            }
         }
 
         function scrollHighlight() {
@@ -355,6 +403,18 @@
                 specialSections[i].classList.remove('highlight')
             }
             targetSection.parentNode.classList.add('highlight')
+        }
+
+        function throttle(fn, interval = 300) {
+            let canRun = true;
+            return function () {
+                if (!canRun) return;
+                canRun = false;
+                setTimeout(() => {
+                    fn.apply(this, arguments);
+                    canRun = true;
+                }, interval);
+            };
         }
 
         var mySwiper = new Swiper ('.swiper-container', {
